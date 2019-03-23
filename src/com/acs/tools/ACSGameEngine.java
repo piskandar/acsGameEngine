@@ -77,27 +77,28 @@ public abstract class ACSGameEngine {
         if (!onUserCreate())
             atomActive = false;
 
-        Instant tp1 = Instant.now();
-        Instant tp2 = Instant.now();
+        long tp1 = System.currentTimeMillis();
+        long tp2 = System.currentTimeMillis();
 
         while (atomActive) {
-//            while (atomActive) {
-                tp2 = Instant.now();
-                Duration elapsedTime = Duration.between(tp2, tp1);
+            while (atomActive) {
+                tp2 = System.currentTimeMillis();
+                long elapsedTime = tp2 - tp1;
                 tp1 = tp2;
 
-                float fElapsedTime = (float) elapsedTime.getNano();
+                float fElapsedTime = elapsedTime / 1000.0f;
 
                 if (!onUserUpdate(fElapsedTime))
                     atomActive = false;
 
+
                 contentPane.draw(defaultDrawTarget.getData());
                 try {
-                    Thread.sleep(40);
+                    Thread.sleep(33);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-//            }
+            }
         }
     }
 
@@ -204,6 +205,7 @@ public abstract class ACSGameEngine {
         drawLine(x1, y1, x2, y2, p);
         drawLine(x2, y2, x3, y3, p);
         drawLine(x3, y3, x1, y1, p);
+
     }
 
     public void drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Pixel p){

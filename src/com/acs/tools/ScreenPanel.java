@@ -22,7 +22,6 @@ public class ScreenPanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        System.out.println("PAINT");
         if (data != null) {
             for (int y = 0; y < screenHeight; y++) {
                 for (int x = 0; x < screenWidth; x++) {

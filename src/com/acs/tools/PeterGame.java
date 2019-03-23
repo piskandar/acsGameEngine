@@ -5,6 +5,7 @@ import java.awt.*;
 public class PeterGame extends ACSGameEngine {
     private Mesh meshCube;
     private Matrix4x4 matProjection;
+    private float theta = 0;
 
     @Override
     public boolean onUserCreate() {
@@ -55,36 +56,65 @@ public class PeterGame extends ACSGameEngine {
 
     @Override
     public boolean onUserUpdate(float elapsedTime) {
+        System.out.println(elapsedTime);
         clear(new Pixel(Color.BLACK));
+
+        Matrix4x4 matRotZ = new Matrix4x4();
+        Matrix4x4 matRotX = new Matrix4x4();
+
+        theta += 1.0f * elapsedTime;
+
+        // Rotation Z
+        matRotZ.m[0][0] = (float) Math.cos(theta);
+        matRotZ.m[0][1] = (float) Math.sin(theta);
+        matRotZ.m[1][0] = (float) Math.sin(theta) * -1.0f;
+        matRotZ.m[1][1] = (float) Math.cos(theta);
+        matRotZ.m[2][2] = 1;
+        matRotZ.m[3][3] = 1;
+
+        // Rotation X
+        matRotX.m[0][0] = 1;
+        matRotX.m[1][1] = (float) Math.cos(theta * 0.5f);
+        matRotX.m[1][2] = (float) Math.sin(theta * 0.5f);
+        matRotX.m[2][1] = (float) Math.sin(theta * 0.5f) * -1.0f;
+        matRotX.m[2][2] = (float) Math.cos(theta * 0.5f);
+        matRotX.m[3][3] = 1;
+
 
         //Draw Triangles
         for (Triangle tri : meshCube.tris) {
             Triangle triProjected = new Triangle();
-            Triangle triTranslated = Triangle.copy(tri);
+            Triangle triRotatedZ = new Triangle();
+            Triangle triRotatedZX = new Triangle();
 
-            triTranslated.points[0].z = tri.points[0].z + 3.0f;
-            triTranslated.points[1].z = tri.points[1].z + 3.0f;
-            triTranslated.points[2].z = tri.points[2].z + 3.0f;
+            // Rotate in Z-Axis
+            multipleMatrixVector(tri.points[0],triRotatedZ.points[0], matRotZ);
+            multipleMatrixVector(tri.points[1],triRotatedZ.points[1], matRotZ);
+            multipleMatrixVector(tri.points[2],triRotatedZ.points[2], matRotZ);
+
+
+            multipleMatrixVector(triRotatedZ.points[0],triRotatedZX.points[0], matRotX);
+            multipleMatrixVector(triRotatedZ.points[1],triRotatedZX.points[1], matRotX);
+            multipleMatrixVector(triRotatedZ.points[2],triRotatedZX.points[2], matRotX);
+
+            Triangle triTranslated = Triangle.copy(triRotatedZX);
+
+            triTranslated.points[0].z = triRotatedZX.points[0].z + 3.0f;
+            triTranslated.points[1].z = triRotatedZX.points[1].z + 3.0f;
+            triTranslated.points[2].z = triRotatedZX.points[2].z + 3.0f;
 
             multipleMatrixVector(triTranslated.points[0],triProjected.points[0], matProjection);
             multipleMatrixVector(triTranslated.points[1],triProjected.points[1], matProjection);
             multipleMatrixVector(triTranslated.points[2],triProjected.points[2], matProjection);
 
-            triProjected.points[0].x += 1.0f;
-            triProjected.points[0].y += 1.0f;
-
-            triProjected.points[1].x += 1.0f;
-            triProjected.points[1].y += 1.0f;
-
-            triProjected.points[2].x += 1.0f;
-            triProjected.points[2].y += 1.0f;
-
+            // Scale into view
+            triProjected.points[0].x += 1.0f; triProjected.points[0].y += 1.0f;
+            triProjected.points[1].x += 1.0f; triProjected.points[1].y += 1.0f;
+            triProjected.points[2].x += 1.0f; triProjected.points[2].y += 1.0f;
             triProjected.points[0].x *= 0.5f * getScreenWidth();
             triProjected.points[0].y *= 0.5f * getScreenHeight();
-
             triProjected.points[1].x *= 0.5f * getScreenWidth();
             triProjected.points[1].y *= 0.5f * getScreenHeight();
-
             triProjected.points[2].x *= 0.5f * getScreenWidth();
             triProjected.points[2].y *= 0.5f * getScreenHeight();
 
