@@ -94,7 +94,7 @@ public abstract class ACSGameEngine {
 
                 contentPane.draw(defaultDrawTarget.getData());
                 try {
-                    Thread.sleep(33);
+                    Thread.sleep(33); //30FPS
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
