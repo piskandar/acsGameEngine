@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff6d37fe-6d21-47e7-b261-afd04d332e4a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game-engine/com/acs/tools/ACSGameEngine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game-engine/com/acs/tools/ACSGameEngine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/game-engine/com/acs/tools/PeterGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/game-engine/com/acs/tools/PeterGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/acs/tools/ACSGameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/ACSGameEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/acs/tools/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/acs/tools/Matrix4x4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/Matrix4x4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/acs/tools/PeterGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/PeterGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/acs/tools/ScreenPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/ScreenPanel.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,15 +42,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Vector3D.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Triangle.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="532">
@@ -78,7 +62,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/acs/tools/ACSGameEngine.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="406">
@@ -88,6 +72,15 @@
                 <element signature="e#1939#1940#0" expanded="true" />
                 <element signature="e#1985#1986#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="89" column="11" selection-start-line="89" selection-start-column="11" selection-end-line="89" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -152,6 +145,7 @@
         <option value="$PROJECT_DIR$/src/com/acs/tools/Main.java" />
         <option value="$PROJECT_DIR$/src/com/acs/tools/PeterGame.java" />
         <option value="$PROJECT_DIR$/src/com/acs/tools/ACSGameEngine.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -240,18 +234,18 @@
       <updated>1553344957352</updated>
       <workItem from="1553344962043" duration="11102000" />
       <workItem from="1553357684989" duration="892000" />
-      <workItem from="1553365260280" duration="2535000" />
+      <workItem from="1553365260280" duration="2657000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14529000" />
+    <option name="totallyTimeSpent" value="14651000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="777" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22617124" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22617124" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -260,7 +254,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.13868614" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.13868614" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.25253457" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -268,7 +262,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3299539" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.329927" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3299539" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -385,6 +379,13 @@
             <element signature="e#1939#1940#0" expanded="true" />
             <element signature="e#1985#1986#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="89" column="11" selection-start-line="89" selection-start-column="11" selection-end-line="89" selection-end-column="11" />
         </state>
       </provider>
     </entry>
