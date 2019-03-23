@@ -56,7 +56,7 @@ public class PeterGame extends ACSGameEngine {
 
     @Override
     public boolean onUserUpdate(float elapsedTime) {
-        System.out.println(elapsedTime);
+
         clear(new Pixel(Color.BLACK));
 
         Matrix4x4 matRotZ = new Matrix4x4();
