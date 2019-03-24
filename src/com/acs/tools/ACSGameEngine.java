@@ -214,6 +214,7 @@ public abstract class ACSGameEngine {
     public void fillTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Pixel p){
         fillTriangle((int)x1, (int)y1, (int)x2, (int)y2, (int)x3, (int)y3, p);
     }
+//    http://www.sunshine2k.de/coding/java/TriangleRasterization/TriangleRasterization.html
     public void fillTriangle(int x1, int y1, int x2, int y2, int x3, int y3, Pixel p){
         if(y1 > y2){
             int temp1 = y1;

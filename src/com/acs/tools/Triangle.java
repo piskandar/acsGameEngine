@@ -2,6 +2,7 @@ package com.acs.tools;
 
 public class Triangle {
     Vector3D[] points ;
+    Pixel pixel;
 
     public Triangle() {
         points = new Vector3D[3];

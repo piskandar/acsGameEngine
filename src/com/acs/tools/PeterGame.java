@@ -1,6 +1,15 @@
 package com.acs.tools;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class PeterGame extends ACSGameEngine {
     private Mesh meshCube;
@@ -11,31 +20,8 @@ public class PeterGame extends ACSGameEngine {
 
     @Override
     public boolean onUserCreate() {
-        meshCube = new Mesh();
 
-        // SOUTH
-        meshCube.tris.add(new Triangle(new Vector3D(0.0f, 0.0f, 0.0f), new Vector3D(0.0f, 1.0f, 0.0f), new Vector3D(1.0f, 1.0f, 0.0f)));
-        meshCube.tris.add(new Triangle(new Vector3D(0.0f, 0.0f, 0.0f), new Vector3D(1.0f, 1.0f, 0.0f), new Vector3D(1.0f, 0.0f, 0.0f)));
-
-        // EAST
-        meshCube.tris.add(new Triangle(new Vector3D(1.0f, 0.0f, 0.0f), new Vector3D(1.0f, 1.0f, 0.0f), new Vector3D(1.0f, 1.0f, 1.0f)));
-        meshCube.tris.add(new Triangle(new Vector3D(1.0f, 0.0f, 0.0f), new Vector3D(1.0f, 1.0f, 1.0f), new Vector3D(1.0f, 0.0f, 1.0f)));
-
-        // NORTH
-        meshCube.tris.add(new Triangle(new Vector3D(1.0f, 0.0f, 1.0f), new Vector3D(1.0f, 1.0f, 1.0f), new Vector3D(0.0f, 1.0f, 1.0f)));
-        meshCube.tris.add(new Triangle(new Vector3D(1.0f, 0.0f, 1.0f), new Vector3D(0.0f, 1.0f, 1.0f), new Vector3D(0.0f, 0.0f, 1.0f)));
-
-        // WEST
-        meshCube.tris.add(new Triangle(new Vector3D(0.0f, 0.0f, 1.0f), new Vector3D(0.0f, 1.0f, 1.0f), new Vector3D(0.0f, 1.0f, 0.0f)));
-        meshCube.tris.add(new Triangle(new Vector3D(0.0f, 0.0f, 1.0f), new Vector3D(0.0f, 1.0f, 0.0f), new Vector3D(0.0f, 0.0f, 0.0f)));
-
-        // TOP
-        meshCube.tris.add(new Triangle(new Vector3D(0.0f, 1.0f, 0.0f), new Vector3D(0.0f, 1.0f, 1.0f), new Vector3D(1.0f, 1.0f, 1.0f)));
-        meshCube.tris.add(new Triangle(new Vector3D(0.0f, 1.0f, 0.0f), new Vector3D(1.0f, 1.0f, 1.0f), new Vector3D(1.0f, 1.0f, 0.0f)));
-
-        // BOTTOM
-        meshCube.tris.add(new Triangle(new Vector3D(1.0f, 0.0f, 1.0f), new Vector3D(0.0f, 0.0f, 1.0f), new Vector3D(0.0f, 0.0f, 0.0f)));
-        meshCube.tris.add(new Triangle(new Vector3D(1.0f, 0.0f, 1.0f), new Vector3D(0.0f, 0.0f, 0.0f), new Vector3D(1.0f, 0.0f, 0.0f)));
+        meshCube = new Mesh("objects/ship.obj");
 
         //projection matrix
 
@@ -55,6 +41,8 @@ public class PeterGame extends ACSGameEngine {
 
         return true;
     }
+
+
 
     @Override
     public boolean onUserUpdate(float elapsedTime) {
@@ -83,6 +71,8 @@ public class PeterGame extends ACSGameEngine {
         matRotX.m[3][3] = 1;
 
 
+        List<Triangle> trianglesToRaster = new ArrayList<>();
+
         //Draw Triangles
         for (Triangle tri : meshCube.tris) {
             Triangle triProjected = new Triangle();
@@ -91,20 +81,20 @@ public class PeterGame extends ACSGameEngine {
 
 
             // Rotate in Z-Axis
-            multipleMatrixVector(tri.points[0],triRotatedZ.points[0], matRotZ);
-            multipleMatrixVector(tri.points[1],triRotatedZ.points[1], matRotZ);
-            multipleMatrixVector(tri.points[2],triRotatedZ.points[2], matRotZ);
+            multiplyMatrixVector(tri.points[0],triRotatedZ.points[0], matRotZ);
+            multiplyMatrixVector(tri.points[1],triRotatedZ.points[1], matRotZ);
+            multiplyMatrixVector(tri.points[2],triRotatedZ.points[2], matRotZ);
 
-            multipleMatrixVector(triRotatedZ.points[0],triRotatedZX.points[0], matRotX);
-            multipleMatrixVector(triRotatedZ.points[1],triRotatedZX.points[1], matRotX);
-            multipleMatrixVector(triRotatedZ.points[2],triRotatedZX.points[2], matRotX);
+            multiplyMatrixVector(triRotatedZ.points[0],triRotatedZX.points[0], matRotX);
+            multiplyMatrixVector(triRotatedZ.points[1],triRotatedZX.points[1], matRotX);
+            multiplyMatrixVector(triRotatedZ.points[2],triRotatedZX.points[2], matRotX);
 
             // Offset into the screen
             Triangle triTranslated = Triangle.copy(triRotatedZX);
 
-            triTranslated.points[0].z = triRotatedZX.points[0].z + 3.0f;
-            triTranslated.points[1].z = triRotatedZX.points[1].z + 3.0f;
-            triTranslated.points[2].z = triRotatedZX.points[2].z + 3.0f;
+            triTranslated.points[0].z = triRotatedZX.points[0].z + 8.0f;
+            triTranslated.points[1].z = triRotatedZX.points[1].z + 8.0f;
+            triTranslated.points[2].z = triRotatedZX.points[2].z + 8.0f;
 
             Vector3D normal = new Vector3D();
             Vector3D line1 = new Vector3D();
@@ -131,9 +121,24 @@ public class PeterGame extends ACSGameEngine {
                 normal.y * (triTranslated.points[0].y - vCamera.y)+
                 normal.z * (triTranslated.points[0].z - vCamera.z) < 0)
             {
-                multipleMatrixVector(triTranslated.points[0], triProjected.points[0], matProjection);
-                multipleMatrixVector(triTranslated.points[1], triProjected.points[1], matProjection);
-                multipleMatrixVector(triTranslated.points[2], triProjected.points[2], matProjection);
+
+                //Illumination
+                Vector3D lightDirection = new Vector3D(0,0,-1);
+
+                double lightLength = Math.sqrt(lightDirection.x * lightDirection.x + lightDirection.y * lightDirection.y + lightDirection.z * lightDirection.z);
+                lightDirection.x /= lightLength;
+                lightDirection.y /= lightLength;
+                lightDirection.z /= lightLength;
+
+                float dotProduct = normal.x * lightDirection.x + normal.y * lightDirection.y + normal.z * lightDirection.z;
+
+                triTranslated.pixel = getColour(Math.abs(dotProduct));
+
+                //Project triangles from 3D --> 2D
+                multiplyMatrixVector(triTranslated.points[0], triProjected.points[0], matProjection);
+                multiplyMatrixVector(triTranslated.points[1], triProjected.points[1], matProjection);
+                multiplyMatrixVector(triTranslated.points[2], triProjected.points[2], matProjection);
+                triProjected.pixel = triTranslated.pixel;
 
                 // Scale into view
                 triProjected.points[0].x += 1.0f;
@@ -149,35 +154,34 @@ public class PeterGame extends ACSGameEngine {
                 triProjected.points[2].x *= 0.5f * getScreenWidth();
                 triProjected.points[2].y *= 0.5f * getScreenHeight();
 
-                fillTriangle(triProjected.points[0].x, triProjected.points[0].y,
-                        triProjected.points[1].x, triProjected.points[1].y,
-                        triProjected.points[2].x, triProjected.points[2].y,
-                        Pixel.WHITE);
+                trianglesToRaster.add(triProjected);
+
+//                drawTriangle(triProjected.points[0].x, triProjected.points[0].y,
+//                        triProjected.points[1].x, triProjected.points[1].y,
+//                        triProjected.points[2].x, triProjected.points[2].y,
+//                        new Pixel(Color.BLACK));
             }
         }
+
+        //Sort triangles back to front
+        trianglesToRaster.sort((t1, t2) -> {
+            float z1 = (t1.points[0].z + t1.points[1].z + t1.points[2].z)/3.0f;
+            float z2 = (t2.points[0].z + t2.points[1].z + t2.points[2].z)/3.0f;
+            return Float.compare(z2, z1);
+        });
+
+        for (Triangle triangle : trianglesToRaster) {
+            fillTriangle(triangle.points[0].x, triangle.points[0].y,
+                    triangle.points[1].x, triangle.points[1].y,
+                    triangle.points[2].x, triangle.points[2].y,
+                    triangle.pixel);
+        }
+
 
         return true;
     }
 
-    private Triangle multipleMatrixVector(Triangle input, Matrix4x4 matrix) {
-        Triangle output = new Triangle();
-        for(int i = 0; i < 3; i ++){
-            output.points[i].x = input.points[i].x * matrix.m[0][0] + input.points[i].y * matrix.m[1][0] + input.points[i].z * matrix.m[2][0] + matrix.m[3][0];
-            output.points[i].y = input.points[i].x * matrix.m[0][1] + input.points[i].y * matrix.m[1][1] + input.points[i].z * matrix.m[2][1] + matrix.m[3][1];
-            output.points[i].z = input.points[i].x * matrix.m[0][2] + input.points[i].y * matrix.m[1][2] + input.points[i].z * matrix.m[2][2] + matrix.m[3][2];
-            float w = input.points[i].x * matrix.m[0][3] + input.points[i].y * matrix.m[1][3] + input.points[i].z * matrix.m[2][3] + matrix.m[3][3];
-
-            if (w != 0.0f)
-            {
-                output.points[i].x /= w; output.points[i].y /= w; output.points[i].z /= w;
-            }
-        }
-
-        return output;
-    }
-
-
-    void multipleMatrixVector(Vector3D input, Vector3D output, Matrix4x4 matrix){
+    private void multiplyMatrixVector(Vector3D input, Vector3D output, Matrix4x4 matrix){
         output.x = input.x * matrix.m[0][0] + input.y * matrix.m[1][0] + input.z * matrix.m[2][0] + matrix.m[3][0];
         output.y = input.x * matrix.m[0][1] + input.y * matrix.m[1][1] + input.z * matrix.m[2][1] + matrix.m[3][1];
         output.z = input.x * matrix.m[0][2] + input.y * matrix.m[1][2] + input.z * matrix.m[2][2] + matrix.m[3][2];
@@ -189,5 +193,9 @@ public class PeterGame extends ACSGameEngine {
         }
     }
 
+    private Pixel getColour(float luminance){
+        int value = (int) (255 * luminance);
+        return new Pixel(new Color(value, value,value));
+    }
 
 }
