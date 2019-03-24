@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff6d37fe-6d21-47e7-b261-afd04d332e4a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/objects/ship.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/objects/teapot.obj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/acs/tools/ACSGameEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/ACSGameEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/acs/tools/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/acs/tools/Mesh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/Mesh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/acs/tools/Matrix4x4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/Matrix4x4.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/acs/tools/PeterGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/PeterGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/acs/tools/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/Triangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/acs/tools/Vector3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/acs/tools/Vector3D.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,22 +18,27 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/com/acs/tools/PeterGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+            <state relative-caret-position="202">
+              <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#6344#6345#0" expanded="true" />
+                <element signature="e#6608#6609#0" expanded="true" />
+                <element signature="e#6732#6733#0" expanded="true" />
+                <element signature="e#6858#6859#0" expanded="true" />
+                <element signature="e#6968#6969#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/acs/tools/PeterGame.java">
+        <entry file="file://$PROJECT_DIR$/objects/teapot.obj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="831">
+              <caret line="9964" column="16" selection-start-line="9964" selection-start-column="16" selection-end-line="9964" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -43,7 +46,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/ship.obj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="831">
+            <state relative-caret-position="3097">
               <caret line="163" column="10" selection-start-line="163" selection-start-column="10" selection-end-line="163" selection-end-column="10" />
             </state>
           </provider>
@@ -52,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Matrix4x4.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+            <state relative-caret-position="382">
+              <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -61,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Vector3D.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+            <state relative-caret-position="38">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -79,12 +82,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Mesh.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
+            <state relative-caret-position="152">
               <caret line="14" selection-start-line="14" selection-end-line="14" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#320#321#0" expanded="true" />
-                <element signature="e#346#347#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,13 +94,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/acs/tools/ACSGameEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
+            <state relative-caret-position="3990">
               <caret line="221" column="23" selection-start-line="221" selection-start-column="23" selection-end-line="221" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1939#1940#0" expanded="true" />
                 <element signature="e#1985#1986#0" expanded="true" />
+                <element signature="e#8666#8667#0" expanded="true" />
                 <element signature="e#8700#8701#0" expanded="true" />
+                <element signature="e#8736#8737#0" expanded="true" />
                 <element signature="e#8771#8772#0" expanded="true" />
               </folding>
             </state>
@@ -109,7 +112,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
+            <state relative-caret-position="1691">
               <caret line="89" column="11" selection-start-line="89" selection-start-column="11" selection-end-line="89" selection-end-column="11" />
             </state>
           </provider>
@@ -118,12 +121,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/acs/tools/ScreenPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
+            <state relative-caret-position="456">
               <caret line="25" selection-start-line="25" selection-end-line="25" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1118#1119#0" expanded="true" />
-                <element signature="e#1160#1161#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -155,16 +156,17 @@
         <option value="$PROJECT_DIR$/src/com/acs/tools/PeterGameEngine.java" />
         <option value="$PROJECT_DIR$/src/com/acs/tools/Pixel.java" />
         <option value="$PROJECT_DIR$/src/com/acs/tools/ScreenPanel.java" />
-        <option value="$PROJECT_DIR$/src/com/acs/tools/Matrix4x4.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/com/acs/tools/Vector3D.java" />
         <option value="$PROJECT_DIR$/src/com/acs/tools/Be.java" />
         <option value="$PROJECT_DIR$/src/com/acs/tools/ACSGameEngine.java" />
         <option value="$PROJECT_DIR$/src/com/acs/tools/Triangle.java" />
         <option value="$PROJECT_DIR$/objects/ship.obj" />
-        <option value="$PROJECT_DIR$/src/com/acs/tools/PeterGame.java" />
         <option value="$PROJECT_DIR$/src/com/acs/tools/Mesh.java" />
         <option value="$PROJECT_DIR$/src/com/acs/tools/Main.java" />
+        <option value="$PROJECT_DIR$/src/com/acs/tools/Matrix4x4.java" />
+        <option value="$PROJECT_DIR$/src/com/acs/tools/Vector3D.java" />
+        <option value="$PROJECT_DIR$/objects/teapot.obj" />
+        <option value="$PROJECT_DIR$/src/com/acs/tools/PeterGame.java" />
       </list>
     </option>
   </component>
@@ -214,7 +216,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553441901903" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553441904386" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
@@ -274,11 +276,12 @@
       <workItem from="1553344962043" duration="11102000" />
       <workItem from="1553357684989" duration="892000" />
       <workItem from="1553365260280" duration="2751000" />
+      <workItem from="1553445116707" duration="2581000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23749000" />
+    <option name="totallyTimeSpent" value="26495000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="960" y="23" width="960" height="1177" extended-state="0" />
@@ -291,7 +294,6 @@
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Duplicate detector" weight="0.3299539" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.17603686" />
@@ -305,6 +307,7 @@
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32903227" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3299539" />
+      <window_info anchor="bottom" id="Duplicate detector" order="13" weight="0.3299539" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -324,7 +327,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/acs/tools/PeterGame.java</url>
-          <line>134</line>
+          <line>66</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
@@ -353,62 +356,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/ScreenPanel.java">
+    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Bresenham.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1118#1119#0" expanded="true" />
-            <element signature="e#1160#1161#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="247">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/objects/ship.obj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="89" column="11" selection-start-line="89" selection-start-column="11" selection-end-line="89" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Matrix4x4.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Vector3D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Bresenham.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#295#296#0" expanded="true" />
-            <element signature="e#353#354#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/ACSGameEngine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="221" column="23" selection-start-line="221" selection-start-column="23" selection-end-line="221" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1939#1940#0" expanded="true" />
-            <element signature="e#1985#1986#0" expanded="true" />
-            <element signature="e#8700#8701#0" expanded="true" />
-            <element signature="e#8771#8772#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="3097">
+          <caret line="163" column="10" selection-start-line="163" selection-start-column="10" selection-end-line="163" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -419,39 +378,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/objects/ship.obj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="831">
-          <caret line="163" column="10" selection-start-line="163" selection-start-column="10" selection-end-line="163" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Mesh.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
+        <state relative-caret-position="152">
           <caret line="14" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#320#321#0" expanded="true" />
-            <element signature="e#346#347#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/ACSGameEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3990">
+          <caret line="221" column="23" selection-start-line="221" selection-start-column="23" selection-end-line="221" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1939#1940#0" expanded="true" />
+            <element signature="e#1985#1986#0" expanded="true" />
+            <element signature="e#8666#8667#0" expanded="true" />
+            <element signature="e#8700#8701#0" expanded="true" />
+            <element signature="e#8736#8737#0" expanded="true" />
+            <element signature="e#8771#8772#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1691">
+          <caret line="89" column="11" selection-start-line="89" selection-start-column="11" selection-end-line="89" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/ScreenPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Matrix4x4.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Vector3D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/objects/teapot.obj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="831">
+          <caret line="9964" column="16" selection-start-line="9964" selection-start-column="16" selection-end-line="9964" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/acs/tools/PeterGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+        <state relative-caret-position="202">
+          <caret line="35" column="54" selection-start-line="35" selection-start-column="54" selection-end-line="35" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#6344#6345#0" expanded="true" />
+            <element signature="e#6608#6609#0" expanded="true" />
+            <element signature="e#6732#6733#0" expanded="true" />
+            <element signature="e#6858#6859#0" expanded="true" />
+            <element signature="e#6968#6969#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/acs/tools/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
         </state>
       </provider>
     </entry>
