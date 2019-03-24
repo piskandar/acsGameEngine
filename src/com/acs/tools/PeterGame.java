@@ -7,6 +7,8 @@ public class PeterGame extends ACSGameEngine {
     private Matrix4x4 matProjection;
     private float theta = 0;
 
+    Vector3D vCamera = new Vector3D();
+
     @Override
     public boolean onUserCreate() {
         meshCube = new Mesh();
@@ -87,44 +89,91 @@ public class PeterGame extends ACSGameEngine {
             Triangle triRotatedZ = new Triangle();
             Triangle triRotatedZX = new Triangle();
 
+
             // Rotate in Z-Axis
             multipleMatrixVector(tri.points[0],triRotatedZ.points[0], matRotZ);
             multipleMatrixVector(tri.points[1],triRotatedZ.points[1], matRotZ);
             multipleMatrixVector(tri.points[2],triRotatedZ.points[2], matRotZ);
 
-
             multipleMatrixVector(triRotatedZ.points[0],triRotatedZX.points[0], matRotX);
             multipleMatrixVector(triRotatedZ.points[1],triRotatedZX.points[1], matRotX);
             multipleMatrixVector(triRotatedZ.points[2],triRotatedZX.points[2], matRotX);
 
+            // Offset into the screen
             Triangle triTranslated = Triangle.copy(triRotatedZX);
 
             triTranslated.points[0].z = triRotatedZX.points[0].z + 3.0f;
             triTranslated.points[1].z = triRotatedZX.points[1].z + 3.0f;
             triTranslated.points[2].z = triRotatedZX.points[2].z + 3.0f;
 
-            multipleMatrixVector(triTranslated.points[0],triProjected.points[0], matProjection);
-            multipleMatrixVector(triTranslated.points[1],triProjected.points[1], matProjection);
-            multipleMatrixVector(triTranslated.points[2],triProjected.points[2], matProjection);
+            Vector3D normal = new Vector3D();
+            Vector3D line1 = new Vector3D();
+            Vector3D line2 = new Vector3D();
 
-            // Scale into view
-            triProjected.points[0].x += 1.0f; triProjected.points[0].y += 1.0f;
-            triProjected.points[1].x += 1.0f; triProjected.points[1].y += 1.0f;
-            triProjected.points[2].x += 1.0f; triProjected.points[2].y += 1.0f;
-            triProjected.points[0].x *= 0.5f * getScreenWidth();
-            triProjected.points[0].y *= 0.5f * getScreenHeight();
-            triProjected.points[1].x *= 0.5f * getScreenWidth();
-            triProjected.points[1].y *= 0.5f * getScreenHeight();
-            triProjected.points[2].x *= 0.5f * getScreenWidth();
-            triProjected.points[2].y *= 0.5f * getScreenHeight();
+            line1.x = triTranslated.points[1].x - triTranslated.points[0].x;
+            line1.y = triTranslated.points[1].y - triTranslated.points[0].y;
+            line1.z = triTranslated.points[1].z - triTranslated.points[0].z;
 
-            drawTriangle(triProjected.points[0].x, triProjected.points[0].y,
-                    triProjected.points[1].x, triProjected.points[1].y,
-                    triProjected.points[2].x, triProjected.points[2].y,
-                    Pixel.WHITE);
+            line2.x = triTranslated.points[2].x - triTranslated.points[0].x;
+            line2.y = triTranslated.points[2].y - triTranslated.points[0].y;
+            line2.z = triTranslated.points[2].z - triTranslated.points[0].z;
+
+            normal.x = line1.y * line2.z - line1.z * line2.y;
+            normal.y = line1.z * line2.x - line1.x * line2.z;
+            normal.z = line1.x * line2.y - line1.y * line2.x;
+
+            double length = Math.sqrt(normal.x * normal.x + normal.y * normal.y + normal.z * normal.z);
+            normal.x /= length;
+            normal.y /= length;
+            normal.z /= length;
+
+            if( normal.x * (triTranslated.points[0].x - vCamera.x)+
+                normal.y * (triTranslated.points[0].y - vCamera.y)+
+                normal.z * (triTranslated.points[0].z - vCamera.z) < 0)
+            {
+                multipleMatrixVector(triTranslated.points[0], triProjected.points[0], matProjection);
+                multipleMatrixVector(triTranslated.points[1], triProjected.points[1], matProjection);
+                multipleMatrixVector(triTranslated.points[2], triProjected.points[2], matProjection);
+
+                // Scale into view
+                triProjected.points[0].x += 1.0f;
+                triProjected.points[0].y += 1.0f;
+                triProjected.points[1].x += 1.0f;
+                triProjected.points[1].y += 1.0f;
+                triProjected.points[2].x += 1.0f;
+                triProjected.points[2].y += 1.0f;
+                triProjected.points[0].x *= 0.5f * getScreenWidth();
+                triProjected.points[0].y *= 0.5f * getScreenHeight();
+                triProjected.points[1].x *= 0.5f * getScreenWidth();
+                triProjected.points[1].y *= 0.5f * getScreenHeight();
+                triProjected.points[2].x *= 0.5f * getScreenWidth();
+                triProjected.points[2].y *= 0.5f * getScreenHeight();
+
+                fillTriangle(triProjected.points[0].x, triProjected.points[0].y,
+                        triProjected.points[1].x, triProjected.points[1].y,
+                        triProjected.points[2].x, triProjected.points[2].y,
+                        Pixel.WHITE);
+            }
         }
 
         return true;
+    }
+
+    private Triangle multipleMatrixVector(Triangle input, Matrix4x4 matrix) {
+        Triangle output = new Triangle();
+        for(int i = 0; i < 3; i ++){
+            output.points[i].x = input.points[i].x * matrix.m[0][0] + input.points[i].y * matrix.m[1][0] + input.points[i].z * matrix.m[2][0] + matrix.m[3][0];
+            output.points[i].y = input.points[i].x * matrix.m[0][1] + input.points[i].y * matrix.m[1][1] + input.points[i].z * matrix.m[2][1] + matrix.m[3][1];
+            output.points[i].z = input.points[i].x * matrix.m[0][2] + input.points[i].y * matrix.m[1][2] + input.points[i].z * matrix.m[2][2] + matrix.m[3][2];
+            float w = input.points[i].x * matrix.m[0][3] + input.points[i].y * matrix.m[1][3] + input.points[i].z * matrix.m[2][3] + matrix.m[3][3];
+
+            if (w != 0.0f)
+            {
+                output.points[i].x /= w; output.points[i].y /= w; output.points[i].z /= w;
+            }
+        }
+
+        return output;
     }
 
 

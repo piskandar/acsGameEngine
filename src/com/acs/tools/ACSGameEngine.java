@@ -211,6 +211,82 @@ public abstract class ACSGameEngine {
     public void drawTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Pixel p){
         drawTriangle((int)x1, (int)y1, (int)x2, (int)y2, (int)x3, (int)y3, p);
     }
+    public void fillTriangle(float x1, float y1, float x2, float y2, float x3, float y3, Pixel p){
+        fillTriangle((int)x1, (int)y1, (int)x2, (int)y2, (int)x3, (int)y3, p);
+    }
+    public void fillTriangle(int x1, int y1, int x2, int y2, int x3, int y3, Pixel p){
+        if(y1 > y2){
+            int temp1 = y1;
+            y1 = y2;
+            y2 = temp1;
+
+            int temp2 = x1;
+            x1 = x2;
+            x2 = temp2;
+        }
+
+        if(y1 > y3){
+            int temp1 = y1;
+            y1 = y3;
+            y3 = temp1;
+
+            int temp2 = x1;
+            x1 = x3;
+            x3 = temp2;
+        }
+
+        if(y2 > y3){
+            int temp1 = y2;
+            y2 = y3;
+            y3 = temp1;
+
+            int temp2 = x2;
+            x2 = x3;
+            x3 = temp2;
+        }
+        if (y2 == y3) {
+            fillBottomFlatTriangle(x1, y1, x2, y2, x3, y3, p);
+        } else if (y1 == y2){
+            fillTopFlatTriangle(x1, y1, x2, y2, x3, y3, p);
+        }else {
+
+            int x4 = (int)(x1 + ((float)(y2 - y1) / (float)(y3 - y1)) * (x3 - x1));
+            int y4 = y2;
+
+            fillBottomFlatTriangle(x1,y1, x2,y2, x4,y4, p);
+            fillTopFlatTriangle(x2,y2, x4,y4, x3,y3,p);
+        }
+
+    }
+
+    private void fillBottomFlatTriangle(int x1, int y1, int x2, int y2, int x3, int y3, Pixel p){
+        float invslope1 = (float)(x2 - x1) / (float)(y2 - y1);
+        float invslope2 = (float)(x3 - x1) / (float)(y3 - y1);
+
+        float curx1 = x1;
+        float curx2 = x1;
+
+        for (int scanlineY = y1; scanlineY <= y2; scanlineY++) {
+            drawLine((int) curx1, scanlineY, (int) curx2, scanlineY, p);
+            curx1 += invslope1;
+            curx2 += invslope2;
+        }
+    }
+
+    private void fillTopFlatTriangle(int x1, int y1, int x2, int y2, int x3, int y3, Pixel p){
+        float invslope1 = (float)(x3 - x1) / (float)(y3 - y1);
+        float invslope2 = (float)(x3 - x2) / (float)(y3 - y2);
+
+        float curx1 = x3;
+        float curx2 = x3;
+
+        for (int scanlineY = y3; scanlineY > y1; scanlineY--)
+        {
+            drawLine((int)curx1, scanlineY, (int)curx2, scanlineY, p);
+            curx1 -= invslope1;
+            curx2 -= invslope2;
+        }
+    }
 
 
     public void clear(Pixel p)
