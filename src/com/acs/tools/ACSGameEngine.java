@@ -1,6 +1,8 @@
 package com.acs.tools;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -9,7 +11,8 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Math.abs;
 
-public abstract class ACSGameEngine {
+public abstract class ACSGameEngine implements KeyListener {
+    protected boolean[] keyboardState = new boolean[256];
 
     private int screenWidth = 256;
     private int screenHeight = 240;
@@ -51,6 +54,7 @@ public abstract class ACSGameEngine {
         jFrame.setSize(screenWidth * pixelWidth, screenHeight * pixelHeight);
         jFrame.setContentPane(contentPane);
         jFrame.setVisible(true);
+        jFrame.addKeyListener(this);
 
         atomActive = true;
         threadPoolExecutor.execute(new Runnable() {
@@ -322,4 +326,16 @@ public abstract class ACSGameEngine {
     public int getScreenHeight() {
         return screenHeight;
     }
+
+    protected boolean getKey(int keyCode){
+        return keyboardState[keyCode];
+    }
+
+    public abstract void keyTyped(KeyEvent e);
+
+
+    public abstract void keyPressed(KeyEvent e);
+
+
+    public abstract void keyReleased(KeyEvent e);
 }

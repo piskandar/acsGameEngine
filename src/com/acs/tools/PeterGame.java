@@ -1,20 +1,23 @@
 package com.acs.tools;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PeterGame extends ACSGameEngine {
     private Mesh meshCube;
     private Matrix4x4 matProjection;
-    private float theta = 0;
+    private float theta = 0.0f;
 
     private Vector3D vCamera = new Vector3D();
+    private Vector3D vLookAt = new Vector3D();
+    float yaw;
 
     @Override
     public boolean onUserCreate() {
 
-        meshCube = new Mesh("objects/teapot.obj");
+        meshCube = new Mesh("objects/axis.obj");
 
         //projection matrix
         matProjection = Matrix4x4.projection(90.0f, (float) getScreenHeight() / (float) getScreenWidth(),0.1f,1000.0f);
@@ -26,16 +29,61 @@ public class PeterGame extends ACSGameEngine {
     @Override
     public boolean onUserUpdate(float elapsedTime) {
 
+        if(getKey(KeyEvent.VK_UP)){
+            vCamera.y += 8.0f * elapsedTime;
+        }
+
+        if(getKey(KeyEvent.VK_DOWN)){
+            vCamera.y -= 8.0f * elapsedTime;
+        }
+
+        if(getKey(KeyEvent.VK_LEFT)){
+            vCamera.x -= 8.0f * elapsedTime;
+        }
+
+        if(getKey(KeyEvent.VK_RIGHT)){
+            vCamera.x += 8.0f * elapsedTime;
+        }
+
+        Vector3D forward = multiplyVector(vLookAt, 8.0f * elapsedTime);
+
+        if(getKey(KeyEvent.VK_W)){
+            vCamera = addVector(vCamera, forward);
+        }
+
+        if(getKey(KeyEvent.VK_S)){
+            vCamera = subtactVector(vCamera, forward);
+        }
+
+        if(getKey(KeyEvent.VK_A)){
+            yaw -= 2.0f * elapsedTime;
+        }
+
+        if(getKey(KeyEvent.VK_D)){
+            yaw += 2.0f * elapsedTime;
+        }
+
+
         clear(new Pixel(Color.BLACK));
 
-        theta += 1.0f * elapsedTime;
+//        theta += 1.0f * elapsedTime;
 
         Matrix4x4 matRotZ = Matrix4x4.rotationZ(theta * 0.5f);
         Matrix4x4 matRotX = Matrix4x4.rotationX(theta);
 
-        Matrix4x4 matTrans = Matrix4x4.translate(0,0,8);
+        Matrix4x4 matTrans = Matrix4x4.translate(0,0,16);
         Matrix4x4 matWorld = Matrix4x4.multiply(matRotZ, matRotX);
         matWorld = Matrix4x4.multiply(matWorld, matTrans);
+
+        Vector3D up = new Vector3D( 0, 1, 0);
+
+        Vector3D target = new Vector3D(0,0,1);
+        Matrix4x4 matCameraRot = Matrix4x4.rotationY(yaw);
+        vLookAt = matrixMultiplyVector(matCameraRot, target);
+        target = addVector(vCamera, vLookAt);
+
+        Matrix4x4 matCamera = pointAt(vCamera,target,up);
+        Matrix4x4 matView = quickInverse(matCamera);
 
         List<Triangle> trianglesToRaster = new ArrayList<>();
 
@@ -43,6 +91,8 @@ public class PeterGame extends ACSGameEngine {
         for (Triangle tri : meshCube.tris) {
             Triangle triProjected = new Triangle();
             Triangle triTransformed = new Triangle();
+            Triangle triViewed = new Triangle();
+
 
             triTransformed.points[0] = matrixMultiplyVector(matWorld, tri.points[0]);
             triTransformed.points[1] = matrixMultiplyVector(matWorld, tri.points[1]);
@@ -66,10 +116,15 @@ public class PeterGame extends ACSGameEngine {
 
                 triTransformed.pixel = getColour(dotProduct);
 
+
+                triViewed.points[0] = matrixMultiplyVector(matView, triTransformed.points[0]);
+                triViewed.points[1] = matrixMultiplyVector(matView, triTransformed.points[1]);
+                triViewed.points[2] = matrixMultiplyVector(matView, triTransformed.points[2]);
+
                 //Project triangles from 3D --> 2D
-                triProjected.points[0] = matrixMultiplyVector(matProjection,triTransformed.points[0]);
-                triProjected.points[1] = matrixMultiplyVector(matProjection,triTransformed.points[1]);
-                triProjected.points[2] = matrixMultiplyVector(matProjection,triTransformed.points[2]);
+                triProjected.points[0] = matrixMultiplyVector(matProjection,triViewed.points[0]);
+                triProjected.points[1] = matrixMultiplyVector(matProjection,triViewed.points[1]);
+                triProjected.points[2] = matrixMultiplyVector(matProjection,triViewed.points[2]);
 
                 triProjected.pixel = triTransformed.pixel;
 
@@ -117,17 +172,20 @@ public class PeterGame extends ACSGameEngine {
         return true;
     }
 
-    private void multiplyMatrixVector(Vector3D input, Vector3D output, Matrix4x4 matrix) {
-        output.x = input.x * matrix.m[0][0] + input.y * matrix.m[1][0] + input.z * matrix.m[2][0] + matrix.m[3][0];
-        output.y = input.x * matrix.m[0][1] + input.y * matrix.m[1][1] + input.z * matrix.m[2][1] + matrix.m[3][1];
-        output.z = input.x * matrix.m[0][2] + input.y * matrix.m[1][2] + input.z * matrix.m[2][2] + matrix.m[3][2];
-        float w = input.x * matrix.m[0][3] + input.y * matrix.m[1][3] + input.z * matrix.m[2][3] + matrix.m[3][3];
+    @Override
+    public void keyTyped(KeyEvent e) {
 
-        if (w != 0.0f) {
-            output.x /= w;
-            output.y /= w;
-            output.z /= w;
-        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+        keyboardState[e.getKeyCode()] = true;
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        keyboardState[e.getKeyCode()] = false;
     }
 
     private Vector3D matrixMultiplyVector(Matrix4x4 matrix, Vector3D input){
@@ -180,4 +238,36 @@ public class PeterGame extends ACSGameEngine {
                 v1.x * v2.y - v1.y * v2.x);
     }
 
+
+    public Matrix4x4 pointAt(Vector3D pos, Vector3D target, Vector3D up){
+        Vector3D newForward = subtactVector(target, pos);
+        newForward = vectorNormalize(newForward);
+
+        Vector3D a = multiplyVector(newForward, vectorDotProduct(up, newForward));
+        Vector3D newUp = subtactVector(up, a);
+        newUp = vectorNormalize(newUp);
+
+        Vector3D newRight = vectorCrossProduct(newUp, newForward);
+
+        Matrix4x4 matrix = new Matrix4x4();
+        matrix.m[0][0] = newRight.x;	matrix.m[0][1] = newRight.y;	matrix.m[0][2] = newRight.z;	matrix.m[0][3] = 0.0f;
+        matrix.m[1][0] = newUp.x;		matrix.m[1][1] = newUp.y;		matrix.m[1][2] = newUp.z;		matrix.m[1][3] = 0.0f;
+        matrix.m[2][0] = newForward.x;	matrix.m[2][1] = newForward.y;	matrix.m[2][2] = newForward.z;	matrix.m[2][3] = 0.0f;
+        matrix.m[3][0] = pos.x;			matrix.m[3][1] = pos.y;			matrix.m[3][2] = pos.z;
+
+        return matrix;
+    }
+
+    public Matrix4x4 quickInverse(Matrix4x4 m) // Only for Rotation/Translation Matrices
+    {
+        Matrix4x4 matrix = new Matrix4x4();
+        matrix.m[0][0] = m.m[0][0]; matrix.m[0][1] = m.m[1][0]; matrix.m[0][2] = m.m[2][0]; matrix.m[0][3] = 0.0f;
+        matrix.m[1][0] = m.m[0][1]; matrix.m[1][1] = m.m[1][1]; matrix.m[1][2] = m.m[2][1]; matrix.m[1][3] = 0.0f;
+        matrix.m[2][0] = m.m[0][2]; matrix.m[2][1] = m.m[1][2]; matrix.m[2][2] = m.m[2][2]; matrix.m[2][3] = 0.0f;
+        matrix.m[3][0] = -(m.m[3][0] * matrix.m[0][0] + m.m[3][1] * matrix.m[1][0] + m.m[3][2] * matrix.m[2][0]);
+        matrix.m[3][1] = -(m.m[3][0] * matrix.m[0][1] + m.m[3][1] * matrix.m[1][1] + m.m[3][2] * matrix.m[2][1]);
+        matrix.m[3][2] = -(m.m[3][0] * matrix.m[0][2] + m.m[3][1] * matrix.m[1][2] + m.m[3][2] * matrix.m[2][2]);
+        matrix.m[3][3] = 1.0f;
+        return matrix;
+    }
 }

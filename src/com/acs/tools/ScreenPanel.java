@@ -2,6 +2,8 @@ package com.acs.tools;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ScreenPanel extends JPanel {
 
@@ -17,6 +19,7 @@ public class ScreenPanel extends JPanel {
 
         this.pixelHeight = pixelHeight;
         this.pixelWidth = pixelWidth;
+
     }
 
     @Override
@@ -46,4 +49,5 @@ public class ScreenPanel extends JPanel {
         this.data = data;
         repaint();
     }
+
 }

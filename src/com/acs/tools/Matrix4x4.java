@@ -88,14 +88,5 @@ public class Matrix4x4 {
                 matrix.m[r][c] = m1.m[r][0] * m2.m[0][c] + m1.m[r][1] * m2.m[1][c] + m1.m[r][2] * m2.m[2][c] + m1.m[r][3] * m2.m[3][c];
         return matrix;
     }
-    /*
 
-        // Rotation X
-        matRotX.m[0][0] = 1;
-        matRotX.m[1][1] = (float) Math.cos(theta * 0.5f);
-        matRotX.m[1][2] = (float) Math.sin(theta * 0.5f);
-        matRotX.m[2][1] = (float) Math.sin(theta * 0.5f) * -1.0f;
-        matRotX.m[2][2] = (float) Math.cos(theta * 0.5f);
-        matRotX.m[3][3] = 1;
-     */
 }
