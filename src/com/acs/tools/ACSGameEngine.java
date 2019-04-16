@@ -293,6 +293,30 @@ public abstract class ACSGameEngine implements KeyListener {
         }
     }
 
+    Pair<Integer, Integer> Clip(int x, int y)
+    {
+        if (x < 0) x = 0;
+        if (x >= screenWidth) x = screenWidth;
+        if (y < 0) y = 0;
+        if (y >= screenHeight) y = screenHeight;
+
+        return new Pair<>(x,y);
+    }
+
+    public void fill(int x1, int y1, int x2, int y2, Pixel p)
+    {
+        Pair<Integer, Integer> clip = Clip(x1, y1);
+        x1 = clip.first;
+        y1 = clip.second;
+        Pair<Integer, Integer> clip1 = Clip(x2, y2);
+        x2 = clip1.first;
+        y2 = clip1.second;
+
+        for (int x = x1; x < x2; x++)
+            for (int y = y1; y < y2; y++)
+                draw(x, y, p);
+    }
+
 
     public void clear(Pixel p)
     {
@@ -302,6 +326,19 @@ public abstract class ACSGameEngine implements KeyListener {
             m[i] = p;
     }
 
+
+    public void drawPartialSprite(int x, int y, Sprite sprite, int ox, int oy, int w, int h) {
+        if(sprite == null){
+            return;
+        }
+
+        for (int i = 0; i < w; i++)
+        {
+            for (int j = 0; j < h; j++) {
+                draw(x + i, y + j, sprite.getColor(i+ox, j+oy));
+            }
+        }
+    }
 
     private int getDrawTargetWidth()
     {
